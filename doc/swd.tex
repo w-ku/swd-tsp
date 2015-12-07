@@ -1,8 +1,20 @@
 \documentclass{beamer}
+
+\mode<presentation>
+{
+  \usetheme{Warsaw}
+  \usefonttheme{professionalfonts}  
+}
+
 \usepackage{polski}
 \usepackage[cp1250]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{beamerthemesplit}
+\usepackage{lmodern}
 \usepackage{amsmath}
+\usepackage{ragged2e}
+\usepackage{tabularx}
+
 
 \begin{document}
 \title{Problem komiwoja¿era} 
@@ -12,18 +24,15 @@
 \frame{\titlepage} 
 
 
-
 \section{Problem komiwoja¿era}
 
 \subsection{Przyk³ad rzeczywistego problemu}
 \frame{
 \frametitle{Przyk³ad rzeczywistego problemu}
-Danych jest N lokacji/miast oraz dla ka¿dej pary lokacji/miast \\
-\emph{(i, j)} dany jest koszt transportu z \emph{i} do \emph{j} (taki sam jak z \emph{j} do \emph{i}). \\
+\justifying
+Dane jest $N$ lokalizacji (miast) oraz, dla ka¿dej pary loklizacji (miast) $(i, j)$, koszt transportu z $i$ do $j$ (taki sam jak z $j$ do $i$). \\
 \medskip
-Serwisant startuje w lokacji nr 1, musi odwiedziæ wszystkie pozosta³e lokacje tylko jeden raz, a na koniec
-wróciæ do lokacji \\
-nr 1. \\
+Rozpoczynaj¹cy trasê w lokalizacji nr 1 serwisant musi odwiedziæ wszystkie pozosta³e lokalizacje dok³adnie jeden raz, a na koniec wróciæ do lokalizacji pocz¹tkowej. \\
 \medskip
 Naturalnie serwisant chce to zrobiæ jak najmniejszym kosztem.
 }
@@ -34,15 +43,15 @@ Naturalnie serwisant chce to zrobiæ jak najmniejszym kosztem.
 \frametitle{Definicja problemu}
 \textbf{Dane:}
 \begin{itemize}
-\item $N$ - liczba wierzcho³ków w grafie
-\item $d_{i, j}$, $i, j = 1, 2, \ldots, N$, gdzie:
+\item $N$ - liczba wierzcho³ków grafu
+\item Funkcja $d_{i, j}$, $i, j = 1, 2, \ldots, N$ taka, ¿e:
 	\begin{itemize}
-	\item $\forall i, j\in\{1, 2, \ldots, N\}\ldotp d_{i, j} = d_{j, i}$,
-	\item $\forall i\in\{1, 2, \ldots, N\}\ldotp d_{i, i} = 0$.
+	\item $\forall i, j \in \{1, 2, \ldots, N\} \ldotp d_{i, j} = d_{j, i}$,
+	\item $\forall i \in \{1, 2, \ldots, N\} \ldotp d_{i, i} = 0$.
 	\end{itemize}
 \end{itemize} 
 \pause
-\textbf{Szukane:} \\
+\textbf{Rozwi¹zanie:} \\
 Taka œcie¿ka $(a_{0}, a_{1}, a_{2}, \ldots, a_{N-1}, a_{N})$, ¿e:
 \begin{itemize}
 \item $a_{0} = a_{N} = 1$,
@@ -79,7 +88,7 @@ Taka œcie¿ka $(a_{0}, a_{1}, a_{2}, \ldots, a_{N-1}, a_{N})$, ¿e:
 	\begin{itemize}
 	\setlength\itemsep{0.5em}
 	\item $a_{0} = a_{N} = 1$ (a wiêc $u_{0} = (1, a_{1}), u_{N-1} = (a_{N-1}, 1)$),
-	\item $a_{n}$ to $a_{n}$ z $x_{n} = (a_{0}, \ldots, a_{n})$ (ostatni odwiedzony wierzcho³ek),
+	\item $a_{n}$ to ostatni odwiedzony wierzcho³ek z $x_{n} = (a_{0}, \ldots, a_{n})$,
 	\item $\forall n\in\{0, 1, \ldots, N-2\} \ldotp \forall k\in\{0, 1, \ldots, n\}\ldotp a_{n+1} \neq a_{k}$,
 	\end{itemize} \pause
 \item $x_{n+1} = f(x_{n}, u_{n}) = (a_{0}, a_{1}, \ldots, a_{n}, a_{n+1})$, \pause
@@ -91,10 +100,12 @@ Taka œcie¿ka $(a_{0}, a_{1}, a_{2}, \ldots, a_{N-1}, a_{N})$, ¿e:
 \frametitle{Ocena procesu wieloetapowego podejmowania decyzji}
 $\bar{u}_{N} = (u_{0}, u_{1}, \ldots, u_{N-1})$ \pause \\
 \medskip
-$Q_{N}(\bar{u}_{N}) = \displaystyle\sum\limits_{n=1}^{N} \varphi(x_{n}, u_{n-1})$ \pause $=$ \\
-$= \displaystyle\sum\limits_{n=1}^{N} d_{a_{n-1},\ a_{n}} =
-\displaystyle\sum\limits_{n=0}^{N-1} d_{a_{n},\ a_{n+1}} =
-\displaystyle\sum\limits_{n=0}^{N-1} g(x_{n}, u_{n})$ \pause \\
+\begin{tabular}{rcl}
+$Q_{N}(\bar{u}_{N})$ &$=$& $\displaystyle\sum\limits_{n=1}^{N} \varphi(x_{n}, u_{n-1})$ \\[16pt]
+  &$=$& $\displaystyle\sum\limits_{n=1}^{N} d_{a_{n-1},\ a_{n}}$ \\[16pt]
+  &$=$& $\displaystyle\sum\limits_{n=0}^{N-1} d_{a_{n},\ a_{n+1}} = \displaystyle\sum\limits_{n=0}^{N-1} g(x_{n}, u_{n})$
+\end{tabular} \\ 
+\pause
 \bigskip
 Szukamy ci¹gu optymalnych decyzji, tj. takiego ci¹gu
 $\bar{u}_{N}^{\star} = (u_{0}^{\star}, u_{1}^{\star}, \ldots, u_{N-1}^{\star})$, ¿e
@@ -108,14 +119,43 @@ $Q_{N}(\bar{u}_{N}^{\star}) = min_{\bar{u}_{N}} Q_{N}(\bar{u}_{N})$.
 \frametitle{W³aœciwoœæ optymalnej œcie¿ki}
 Ka¿da podœcie¿ka optymalnej œcie¿ki jest optymalna, tzn. \\
 $\forall n\in\{0, 1, \ldots, N\}\ldotp \displaystyle\lbrack(a_{0}, a_{1}, \ldots, a_{n})$ jest optymalna $\implies$
-$\forall k\in\{0, 1, \ldots, n-1\}\ldotp (a_{0}, a_{1}, \ldots, a_{k})$ jest optymalna\rbrack. \\
+$\forall k\in\{0, 1, \ldots, n-1\}\ldotp (a_{0}, a_{1}, \ldots, a_{k})$ jest optymalna$\rbrack$. \\
 \bigskip
 \textbf{Dowód:} Indukcja po d³ugoœci œcie¿ki. \pause \\
 \bigskip
-\textbf{Wniosek:} Nie musimy rozpatrywaæ wszystkich mo¿liwych œcie¿ek, wystarczy rozpatrywaæ zbiory ju¿ odwiedzonych
-wierzcho³ków z wyró¿nionym ostatnio odwiedzonym wierzcho³kiem.
+\textbf{Wniosek:} Nie musimy rozpatrywaæ wszystkich mo¿liwych œcie¿ek, wystarczy rozpatrywaæ zbiory ju¿ odwiedzonych wierzcho³ków z wyró¿nionym ostatnio odwiedzonym wierzcho³kiem.
 }
 
+
+\frame{
+    \frametitle{W³aœciwoœæ optymalnej œcie¿ki}
+    \justify
+    Niech $x_N = (a_0, \ldots, a_N)$ bêdzie optymaln¹ œcie¿k¹. Z w³asnoœci optymalnoœci
+    wynika, ¿e œcie¿ka prowadz¹ca do przedostatniego wierzcho³ka optymalnej trasy, a 
+    wiêc $x_{N-1} = (a_0, \ldots, a_{N-1})$, równie¿ jest optymalna. 
+}
+
+\frame{
+\frametitle{W³aœciwoœæ optymalnej œcie¿ki}
+\justify
+    Innymi s³owy -- optymaln¹ œcie¿kê przechodz¹c¹ przez wierzcho³ki ze zbioru
+    $S_N = \{1, \ldots, N\}$ mo¿emy skonstruowaæ wybieraj¹c spoœród œcie¿ek przechodz¹cych
+    przez wierzcho³ki z $S_{N-1} = \{1, \ldots, N-1\}$ tak¹ œcie¿kê $p = (a_0, \ldots, a_{N-1})$, ¿e 
+    wartoœæ $$ d_{a_{N-1}, N} + \sum_{i=0}^{N-2} d_{a_i, a_{i+1}} $$ jest najmniejsza. \\ 
+    \medskip
+    Wtedy $p$ musi byæ najkrótsz¹ œcie¿k¹ przez $S_{N-1}$ koñcz¹c¹ siê w $a_{N-1}$.
+}
+
+\frame{
+    \frametitle{W³aœciwoœæ optymalnej œcie¿ki}
+    \justify
+    Par¹ $(S, j)$ bêdziemy oznaczaæ najkrótsz¹ œcie¿kê przechodz¹c¹ przez wierzcho³ki 
+    $v \in S$ i koñcz¹c¹ siê w $j$. \\
+    \bigskip
+    Przyjmuj¹c oznaczenie $C(S, j)$ - koszt œcie¿ki zdefiniowanej jak wy¿ej, otrzymujemy zale¿noœæ: 
+    $$ C(S, j) = \min \left\{ C(S-\{j\}, i) + d_{i,j}: i \in S, i \neq j \right\} $$
+    przy czym $C(\{1\}, 1) = 0$.
+}
 
 \subsection{Modyfikacja obiektu podejmuj¹cego decyzje}
 \frame{
@@ -147,10 +187,12 @@ wierzcho³ków z wyró¿nionym ostatnio odwiedzonym wierzcho³kiem.
 \frametitle{Ocena procesu wieloetapowego podejmowania decyzji}
 $\bar{u}_{N} = (u_{0}, u_{1}, \ldots, u_{N-1})$ \pause \\
 \medskip
-$Q_{N}(\bar{u}_{N}) = \displaystyle\sum\limits_{n=1}^{N} \varphi(x_{n}, u_{n-1})$ \pause $=$ \\
-$= \displaystyle\sum\limits_{n=1}^{N} d_{j_{n-1},\ j_{n}} =
-\displaystyle\sum\limits_{n=0}^{N-1} d_{j_{n},\ j_{n+1}} =
-\displaystyle\sum\limits_{n=0}^{N-1} g(x_{n}, u_{n})$ \pause \\
+\begin{tabular}{rcl}
+ $Q_{N}(\bar{u}_{N})$ &$=$& $\displaystyle\sum\limits_{n=1}^{N} \varphi(x_{n}, u_{n-1})$ \\[16pt]
+ &$=$& $\displaystyle\sum\limits_{n=1}^{N} d_{j_{n-1},\ j_{n}}$ \\[16pt]
+ &$=$& $\displaystyle\sum\limits_{n=0}^{N-1} d_{j_{n},\ j_{n+1}} = \displaystyle\sum\limits_{n=0}^{N-1} g(x_{n}, u_{n})$ 
+\end{tabular} \\ 
+\pause
 \bigskip
 Szukamy ci¹gu optymalnych decyzji, tj. takiego ci¹gu
 $\bar{u}_{N}^{\star} = (u_{0}^{\star}, u_{1}^{\star}, \ldots, u_{N-1}^{\star})$, ¿e
