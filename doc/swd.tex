@@ -138,12 +138,12 @@ $\forall k\in\{0, 1, \ldots, n-1\}\ldotp (a_{0}, a_{1}, \ldots, a_{k})$ jest opt
 \frame{
 \frametitle{W³aœciwoœæ optymalnej œcie¿ki}
 \justify
-    Innymi s³owy -- optymaln¹ œcie¿kê przechodz¹c¹ przez wierzcho³ki ze zbioru
-    $S_N = \{1, \ldots, N\}$ mo¿emy skonstruowaæ wybieraj¹c spoœród œcie¿ek przechodz¹cych
-    przez wierzcho³ki z $S_{N-1} = \{1, \ldots, N-1\}$ tak¹ œcie¿kê $p = (a_0, \ldots, a_{N-1})$, ¿e 
-    wartoœæ $$ d_{a_{N-1}, N} + \sum_{i=0}^{N-2} d_{a_i, a_{i+1}} $$ jest najmniejsza. \\ 
+    Jeœli $p = (a_0, \ldots, a_{n})$ jest optymaln¹ œcie¿k¹ przechodz¹c¹ przez
+    wszystkie wierzcho³ki ze zbioru $S$, to dla œcie¿ki 
+    $p' = (a_0, \ldots, a_{n-1})$, gdzie $a_i \in S \setminus \{a_{n}\}$ ($i = 0, \ldots, n-1$), 
+    wartoœæ $$ d_{a_{n-1}, a_{n}} + \sum_{i=0}^{n-2} d_{a_i}, a_{i+1} $$ jest najmniejsza. \\ 
     \medskip
-    Wtedy $p$ musi byæ najkrótsz¹ œcie¿k¹ przez $S_{N-1}$ koñcz¹c¹ siê w $a_{N-1}$.
+    Zatem $p'$ musi byæ najkrótsz¹ œcie¿k¹ przez $S \setminus \{a_{n}\}$ koñcz¹c¹ siê w $a_{n-1}$.
 }
 
 \frame{
@@ -153,7 +153,7 @@ $\forall k\in\{0, 1, \ldots, n-1\}\ldotp (a_{0}, a_{1}, \ldots, a_{k})$ jest opt
     $v \in S$ i koñcz¹c¹ siê w $j$. \\
     \bigskip
     Przyjmuj¹c oznaczenie $C(S, j)$ - koszt œcie¿ki zdefiniowanej jak wy¿ej, otrzymujemy zale¿noœæ: 
-    $$ C(S, j) = \min \left\{ C(S-\{j\}, i) + d_{i,j}: i \in S, i \neq j \right\} $$
+    $$ C(S, j) = \min \left\{ C(S \setminus \{j\}, i) + d_{i,j}: i \in S, i \neq j \right\} $$
     przy czym $C(\{1\}, 1) = 0$.
 }
 
