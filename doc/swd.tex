@@ -13,6 +13,7 @@
 \usepackage{amsmath}
 \usepackage{ragged2e}
 \usepackage{tabularx}
+\usepackage{graphicx}
 
 
 \begin{document}
@@ -223,10 +224,13 @@ $d_{i, j}$ & 1 & 2 & 3 & 4 \\ \hline
 }
 
 \frame{
+\begin{table}[ht]
+\begin{minipage}[b]{0.6\linewidth}\centering
+
 \begin{equation}
-V_{1}(x_{3}) = min_{u_{3}} (g(x_{3}, u_{3}) + V_{0})
+V_{1}(x_{3}) = min_{u_{3}} (g(x_{3}, u_{3}) + V_{0})\nonumber
 \end{equation}
-\begin{center}
+
 \begin{tabular}{| c | c | c |}
 \hline
 $x_{3}$ & $u_{3}$ & $V_{1}(x_{3})$ \\ \hline
@@ -234,58 +238,161 @@ $(\{1,2,3,4\}, 2)$ & $(2, 1)$ & $d_{2, 1} = 4$ \\ \hline
 $(\{1,2,3,4\}, 3)$ & $(3, 1)$ & $d_{3, 1} = 2$ \\ \hline
 $(\{1,2,3,4\}, 4)$ & $(4, 1)$ & $d_{4, 1} = 1$ \\ \hline
 \end{tabular}
-\end{center}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.3\linewidth}\centering
+
+\begin{tabular}{| c | l  l  l  l |}
+\hline
+$d_{i, j}$ & 1 & 2 & 3 & 4 \\ \hline
+1 & 0 & 4 & 2 & 1 \\
+2 & 4 & 0 & 3 & 2 \\
+3 & 2 & 3 & 0 & 3 \\
+4 & 1 & 2 & 3 & 0 \\ \hline
+\end{tabular}
+
+\includegraphics[width=\textwidth]{graph.png}
+
+\end{minipage}
+\end{table}
 }
 
 \frame{
+\begin{table}[ht]
+\begin{minipage}[b]{0.6\linewidth}\centering
+
+\begin{tabular}{| c | c | c |}
+\hline
+$x_{3}$ & $u_{3}$ & $V_{1}(x_{3})$ \\ \hline
+$(\{1,2,3,4\}, 2)$ & $(2, 1)$ & $d_{2, 1} = \alert<5,6>{4}$ \\ \hline
+$(\{1,2,3,4\}, 3)$ & $(3, 1)$ & $d_{3, 1} = \alert<3,4>{2}$ \\ \hline
+$(\{1,2,3,4\}, 4)$ & $(4, 1)$ & $d_{4, 1} = \alert<1,2>{1}$ \\ \hline
+\end{tabular}
+
 \begin{equation}
-V_{2}(x_{2}) = min_{u_{2}} (g(x_{2}, u_{2}) + V_{1}(x_{3}))
+V_{2}(x_{2}) = min_{u_{2}} (g(x_{2}, u_{2}) + V_{1}(x_{3}))\nonumber
 \end{equation}
-\begin{center}
+
 \begin{tabular}{| c | c | c |}
 \hline
 $x_{2}$ & $u_{2}$ & $V_{2}(x_{2})$ \\ \hline
-$(\{1,2,3\}, 2)$ & $(2, 4)$ & $1 + d_{2, 4} = 3$ \\ \hline
-$(\{1,2,3\}, 3)$ & $(3, 4)$ & $1 + d_{3, 4} = 4$ \\ \hline
-$(\{1,2,4\}, 2)$ & $(2, 3)$ & $2 + d_{2, 3} = 5$ \\ \hline
-$(\{1,2,4\}, 4)$ & $(4, 3)$ & $2 + d_{4, 3} = 5$ \\ \hline
-$(\{1,3,4\}, 3)$ & $(3, 2)$ & $4 + d_{3, 2} = 7$ \\ \hline
-$(\{1,3,4\}, 4)$ & $(4, 2)$ & $4 + d_{4, 2} = 6$ \\ \hline
+$(\{1,2,3\}, 2)$ & $(2, 4)$ & $\alert<1>{1} + d_{2, 4} = 3$ \\ \hline
+$(\{1,2,3\}, 3)$ & $(3, 4)$ & $\alert<2>{1} + d_{3, 4} = 4$ \\ \hline
+$(\{1,2,4\}, 2)$ & $(2, 3)$ & $\alert<3>{2} + d_{2, 3} = 5$ \\ \hline
+$(\{1,2,4\}, 4)$ & $(4, 3)$ & $\alert<4>{2} + d_{4, 3} = 5$ \\ \hline
+$(\{1,3,4\}, 3)$ & $(3, 2)$ & $\alert<5>{4} + d_{3, 2} = 7$ \\ \hline
+$(\{1,3,4\}, 4)$ & $(4, 2)$ & $\alert<6>{4} + d_{4, 2} = 6$ \\ \hline
 \end{tabular}
-\end{center}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.3\linewidth}\centering
+
+\begin{tabular}{| c | l  l  l  l |}
+\hline
+$d_{i, j}$ & 1 & 2 & 3 & 4 \\ \hline
+1 & 0 & 4 & 2 & 1 \\
+2 & 4 & 0 & 3 & 2 \\
+3 & 2 & 3 & 0 & 3 \\
+4 & 1 & 2 & 3 & 0 \\ \hline
+\end{tabular}
+
+\includegraphics[width=\textwidth]{graph.png}
+
+\end{minipage}
+\end{table}
 }
 
 \frame{
+\begin{table}[ht]
+\begin{minipage}[b]{0.6\linewidth}\centering
+
+\begin{tabular}{| c | c | c |}
+\hline
+$x_{2}$ & $u_{2}$ & $V_{2}(x_{2})$ \\ \hline
+$(\{1,2,3\}, 2)$ & $(2, 4)$ & $1 + d_{2, 4} = \alert<3>{3}$ \\ \hline
+$(\{1,2,3\}, 3)$ & $(3, 4)$ & $1 + d_{3, 4} = \alert<1>{4}$ \\ \hline
+$(\{1,2,4\}, 2)$ & $(2, 3)$ & $2 + d_{2, 3} = \alert<5>{5}$ \\ \hline
+$(\{1,2,4\}, 4)$ & $(4, 3)$ & $2 + d_{4, 3} = \alert<2>{5}$ \\ \hline
+$(\{1,3,4\}, 3)$ & $(3, 2)$ & $4 + d_{3, 2} = \alert<6>{7}$ \\ \hline
+$(\{1,3,4\}, 4)$ & $(4, 2)$ & $4 + d_{4, 2} = \alert<4>{6}$ \\ \hline
+\end{tabular}
+\vspace{0.0cm}
 \begin{equation}
-V_{3}(x_{1}) = min_{u_{1}} (g(x_{1}, u_{1}) + V_{2}(x_{2}))
+V_{3}(x_{1}) = min_{u_{1}} (g(x_{1}, u_{1}) + V_{2}(x_{2}))\nonumber
 \end{equation}
-\begin{center}
+
 \begin{tabular}{| c | c | c |}
 \hline
 $x_{1}$ & $u_{1}$ & $V_{3}(x_{1})$ \\ \hline
-$(\{1,2\}, 2)$ & $(2, 3)$ & $4 + d_{2, 3} = \underline{7}$ \\
- & $(2, 4)$ & $5 + d_{2, 4} = 7$ \\ \hline
-$(\{1,3\}, 3)$ & $(3, 2)$ & $3 + d_{3, 2} = \underline{6}$ \\
- & $(3, 4)$ & $6 + d_{3, 4} = 9$ \\ \hline
-$(\{1,4\}, 4)$ & $(4, 2)$ & $5 + d_{4, 2} = \underline{7}$ \\
- & $(4, 3)$ & $7 + d_{4, 3} = 10$ \\ \hline
+$(\{1,2\}, 2)$ & $(2, 3)$ & $\alert<1>{4} + d_{2, 3} = \underline{7}$ \\
+ & $(2, 4)$ & $\alert<2>{5} + d_{2, 4} = 7$ \\ \hline
+$(\{1,3\}, 3)$ & $(3, 2)$ & $\alert<3>{3} + d_{3, 2} = \underline{6}$ \\
+ & $(3, 4)$ & $\alert<4>{6} + d_{3, 4} = 9$ \\ \hline
+$(\{1,4\}, 4)$ & $(4, 2)$ & $\alert<5>{5} + d_{4, 2} = \underline{7}$ \\
+ & $(4, 3)$ & $\alert<6>{7} + d_{4, 3} = 10$ \\ \hline
 \end{tabular}
-\end{center}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.3\linewidth}\centering
+
+\begin{tabular}{| c | l  l  l  l |}
+\hline
+$d_{i, j}$ & 1 & 2 & 3 & 4 \\ \hline
+1 & 0 & 4 & 2 & 1 \\
+2 & 4 & 0 & 3 & 2 \\
+3 & 2 & 3 & 0 & 3 \\
+4 & 1 & 2 & 3 & 0 \\ \hline
+\end{tabular}
+
+\includegraphics[width=\textwidth]{graph.png}
+
+\end{minipage}
+\end{table}
 }
 
 \frame{
+\begin{table}[ht]
+\begin{minipage}[b]{0.6\linewidth}\centering
+
+\begin{tabular}{| c | c | c |}
+\hline
+$x_{1}$ & $u_{1}$ & $V_{3}(x_{1})$ \\ \hline
+$(\{1,2\}, 2)$ & $(2, 3)$ & $4 + d_{2, 3} = \alert<1>{\underline{7}}$ \\
+ & $(2, 4)$ & $5 + d_{2, 4} = 7$ \\ \hline
+$(\{1,3\}, 3)$ & $(3, 2)$ & $3 + d_{3, 2} = \alert<2>{\underline{6}}$ \\
+ & $(3, 4)$ & $6 + d_{3, 4} = 9$ \\ \hline
+$(\{1,4\}, 4)$ & $(4, 2)$ & $5 + d_{4, 2} = \alert<3>{\underline{7}}$ \\
+ & $(4, 3)$ & $7 + d_{4, 3} = 10$ \\ \hline
+\end{tabular}
+\vspace{0.0cm}
 \begin{equation}
-V_{4}(x_{0}) = min_{u_{0}} (g(x_{0}, u_{0}) + V_{3}(x_{1}))
+V_{4}(x_{0}) = min_{u_{0}} (g(x_{0}, u_{0}) + V_{3}(x_{1}))\nonumber
 \end{equation}
-\begin{center}
+
 \begin{tabular}{| c | c | c |}
 \hline
 $x_{0}$ & $u_{0}$ & $V_{4}(x_{0})$ \\ \hline
-$(\{1\}, 1)$ & $(1, 2)$ & $7 + d_{1, 2} = 11$ \\
- & $(1, 3)$ & $6 + d_{1, 3} = \underline{8}$ \\
- & $(1, 4)$ & $7 + d_{1, 4} = 8$ \\ \hline
+$(\{1\}, 1)$ & $(1, 2)$ & $\alert<1>{7} + d_{1, 2} = 11$ \\
+ & $(1, 3)$ & $\alert<2>{6} + d_{1, 3} = \underline{8}$ \\
+ & $(1, 4)$ & $\alert<3>{7} + d_{1, 4} = 8$ \\ \hline
 \end{tabular}
-\end{center}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.3\linewidth}\centering
+
+\begin{tabular}{| c | l  l  l  l |}
+\hline
+$d_{i, j}$ & 1 & 2 & 3 & 4 \\ \hline
+1 & 0 & 4 & 2 & 1 \\
+2 & 4 & 0 & 3 & 2 \\
+3 & 2 & 3 & 0 & 3 \\
+4 & 1 & 2 & 3 & 0 \\ \hline
+\end{tabular}
+
+\includegraphics[width=\textwidth]{graph.png}
+
+\end{minipage}
+\end{table}
 }
 
 \frame{
@@ -307,4 +414,3 @@ Q_{N}(\bar{u}_{N}^{\star}) = 8
 }
 
 \end{document}
-
